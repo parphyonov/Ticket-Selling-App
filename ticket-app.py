@@ -3,8 +3,12 @@ import os
 os.system('clear')
 
 TICKET_PRICE = 10
+SERVICE_CHARGE = 2
 
 tickets_remaining = 100
+
+def calculate_price(number_of_tickets):
+    return (number_of_tickets * TICKET_PRICE) + SERVICE_CHARGE
 
 def greet_user():
     user_name = input('Greetings from Tickets App. What is your name? ')
@@ -25,7 +29,7 @@ def check_number(tickets_remaining):
     else:
         return 'tickets'
 
-def apply_ticket_request(tickets_remaining, TICKET_PRICE, user_name):
+def apply_ticket_request(tickets_remaining, user_name):
     while True:
         print('')
         try:
@@ -51,17 +55,19 @@ def apply_ticket_request(tickets_remaining, TICKET_PRICE, user_name):
             else:
                 print('')
                 print('You are about to purchase {} {}.'.format(request, check_number(request)))
-                print('It is going to cost you {} usd.'.format(request * TICKET_PRICE))
+                print('It is going to cost you {} usd.'.format(calculate_price(request)))
                 print('')
                 confirmation_of_purchase = input('Would you like to confirm? (Y/n) ')
                 if confirmation_of_purchase.lower() != 'y':
+                    print('Well, {}. Let us give you another try then.'.format(user_name))
                     continue
                 else:
                     print('')
                     print('Thank you very much for your purchase, {}. See you at the performance!'.format(user_name))
+                    print('🎫' * request)
                     return tickets_remaining - request
 
-def ticket_app(tickets_remaining, TICKET_PRICE):
+def ticket_app(tickets_remaining):
 
     if check_availability():
         user_name = greet_user()
@@ -73,15 +79,14 @@ def ticket_app(tickets_remaining, TICKET_PRICE):
         else:
             print('There are currently {} tickets on sale!'.format(tickets_remaining))
 
-        tickets_remaining = apply_ticket_request(tickets_remaining, TICKET_PRICE, user_name)
+        tickets_remaining = apply_ticket_request(tickets_remaining, user_name)
 
         print('')
         print('Thank you for using Tickets App, {}! We hope to see you again!'.format(user_name))
         print('')
-        
         return tickets_remaining
 
 
 
-tickets_remaining = ticket_app(tickets_remaining, TICKET_PRICE)
+tickets_remaining = ticket_app(tickets_remaining)
 print(tickets_remaining)
