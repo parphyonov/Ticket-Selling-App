@@ -75,8 +75,13 @@ def ticket_app(tickets_remaining, TICKET_PRICE):
 
         tickets_remaining = apply_ticket_request(tickets_remaining, TICKET_PRICE, user_name)
 
-    print('')
-    print('Thank you for using Tickets App, {}! We hope to see you again!'.format(user_name))
-    print('')
+        print('')
+        print('Thank you for using Tickets App, {}! We hope to see you again!'.format(user_name))
+        print('')
+        
+        return tickets_remaining
 
-ticket_app(tickets_remaining, TICKET_PRICE)
+
+
+tickets_remaining = ticket_app(tickets_remaining, TICKET_PRICE)
+print(tickets_remaining)
