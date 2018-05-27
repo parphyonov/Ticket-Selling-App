@@ -84,6 +84,7 @@ def ticket_app(tickets_remaining):
         print('')
         print('Thank you for using Tickets App, {}! We hope to see you again!'.format(user_name))
         print('')
+
         return tickets_remaining
 
 
